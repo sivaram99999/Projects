@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import = "java.util.List, com.cricket.modle.Playerinfomodle, java.util.ArrayList, com.cricket.DAO.Playerdao" %>
+<%@page import = "java.util.List, com.cricket.modle.Playerinfomodle, java.util.ArrayList, com.cricket.DAO.Playerdao , com.cricket.DAO.userdao" %>
     
 
 <!DOCTYPE html>
@@ -381,6 +381,18 @@ String username = (String) session.getAttribute("username");
 
 
         <!-- ================= STATISTICS ================= -->
+        
+        <%
+     username = (String) session.getAttribute("username");
+
+    userdao ud = new userdao();
+
+    int totalPlayers = 0;
+
+    if (username != null) {
+        totalPlayers = ud.no_of_playersaddedbyuser(username);
+    }
+%>
 
         <div class="col-lg-8">
 
@@ -394,9 +406,7 @@ String username = (String) session.getAttribute("username");
                             <i class="bi bi-people-fill"></i>
                         </div>
 
-                        <div class="stat-number">
-                            12
-                        </div>
+                        <h2><%= totalPlayers %></h2>
 
                         <div class="stat-title">
                             Players Added
@@ -533,8 +543,8 @@ list = pd.getplayerbyuser(username);
             	<td><%=p.getStrike_rate() %></td>
             	<td><%=p.getEconomy_rate() %></td>
             	<td><%=p.getFitness_status() %></td>
-            	<td>Edit</td>
-            	<td>Delete</td>
+            	<td><a href=" modification.jsp">Edit</a></td>
+            	<td><a href = " modification.jsp">Delete</a></td>
             	
             </tr>
             <%} %>

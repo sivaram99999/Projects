@@ -13,6 +13,7 @@ import com.cricket.utility.DBConnection;
 public class Playerdao {
 	Connection con  = null;
 	String Status = "fail";
+	//Playerdao pd = new Playerdao();
 	
 	public List<Playerinfomodle> getall() {
 		List<Playerinfomodle> list = new ArrayList<>();
@@ -149,8 +150,207 @@ public class Playerdao {
 		
 		return list;
 	}
+	
+	
+	public List<Playerinfomodle> eligible_players() {
+		List<Playerinfomodle> list = new ArrayList<>();
+		try{
+			con = DBConnection.getConnection();
+			 PreparedStatement ps = con.prepareStatement("select * from players where matches>=20 and fitness >=75");			 
+			 ResultSet rs = ps.executeQuery();
+			 while (rs.next()) {
+				 Playerinfomodle pm =  new Playerinfomodle();
+				 pm.setPlayerId(rs.getInt(1));
+				 pm.setFirstName(rs.getString(2));
+				 pm.setLastName(rs.getString(3));
+				 pm.setAge(rs.getInt(4));
+				 pm.setCity(rs.getString(5));
+				 pm.setRole(rs.getString(6));
+				 pm.setBatting_style(rs.getString(7));
+				 pm.setBowling_style(rs.getString(8));
+				 pm.setMatches(rs.getInt(9));
+				 pm.setRuns(rs.getInt(10));
+				 pm.setWickets(rs.getInt(11));
+				 pm.setBalls_faced(rs.getInt(12));
+				 pm.setBalls_bowled(rs.getInt(13));
+				 pm.setRuns_conceded(rs.getInt(14));
+				 pm.setStrike_rate(rs.getDouble(15));
+				 pm.setEconomy_rate(rs.getDouble(16));
+				 pm.setFitness_status(rs.getInt(17));
+				 pm.setUsername(rs.getString(18));
+				 list.add(pm);
+				 				 
+			 }
+			 
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return list;
+	}
 
 	
+	public List<Playerinfomodle> getallbatsmen() {
+		List<Playerinfomodle> list = new ArrayList<>();
+		try{
+			con = DBConnection.getConnection();
+			 PreparedStatement ps = con.prepareStatement("select * from players where role =?");
+			 ps.setString(1, "Batsman");
+			 
+			 ResultSet rs = ps.executeQuery();
+			 while (rs.next()) {
+				 Playerinfomodle pm =  new Playerinfomodle();
+				 pm.setPlayerId(rs.getInt(1));
+				 pm.setFirstName(rs.getString(2));
+				 pm.setLastName(rs.getString(3));
+				 pm.setAge(rs.getInt(4));
+				 pm.setCity(rs.getString(5));
+				 pm.setRole(rs.getString(6));
+				 pm.setBatting_style(rs.getString(7));
+				 pm.setBowling_style(rs.getString(8));
+				 pm.setMatches(rs.getInt(9));
+				 pm.setRuns(rs.getInt(10));
+				 pm.setWickets(rs.getInt(11));
+				 pm.setBalls_faced(rs.getInt(12));
+				 pm.setBalls_bowled(rs.getInt(13));
+				 pm.setRuns_conceded(rs.getInt(14));
+				 pm.setStrike_rate(rs.getDouble(15));
+				 pm.setEconomy_rate(rs.getDouble(16));
+				 pm.setFitness_status(rs.getInt(17));
+				 pm.setUsername(rs.getString(18));
+				 list.add(pm);
+				 				 
+			 }
+			 
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return list;
+	}
+	
+	
+	public List<Playerinfomodle> getallbowlers() {
+		List<Playerinfomodle> list = new ArrayList<>();
+		try{
+			con = DBConnection.getConnection();
+			 PreparedStatement ps = con.prepareStatement("select * from players where role =?");
+			 ps.setString(1, "Bowler");
+			 
+			 ResultSet rs = ps.executeQuery();
+			 while (rs.next()) {
+				 Playerinfomodle pm =  new Playerinfomodle();
+				 pm.setPlayerId(rs.getInt(1));
+				 pm.setFirstName(rs.getString(2));
+				 pm.setLastName(rs.getString(3));
+				 pm.setAge(rs.getInt(4));
+				 pm.setCity(rs.getString(5));
+				 pm.setRole(rs.getString(6));
+				 pm.setBatting_style(rs.getString(7));
+				 pm.setBowling_style(rs.getString(8));
+				 pm.setMatches(rs.getInt(9));
+				 pm.setRuns(rs.getInt(10));
+				 pm.setWickets(rs.getInt(11));
+				 pm.setBalls_faced(rs.getInt(12));
+				 pm.setBalls_bowled(rs.getInt(13));
+				 pm.setRuns_conceded(rs.getInt(14));
+				 pm.setStrike_rate(rs.getDouble(15));
+				 pm.setEconomy_rate(rs.getDouble(16));
+				 pm.setFitness_status(rs.getInt(17));
+				 pm.setUsername(rs.getString(18));
+				 list.add(pm);
+				 				 
+			 }
+			 
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return list;
+	}
+	
+	public List<Playerinfomodle> getallAllrounders() {
+		List<Playerinfomodle> list = new ArrayList<>();
+		try{
+			con = DBConnection.getConnection();
+			 PreparedStatement ps = con.prepareStatement("select * from players where role =?");
+			 ps.setString(1, "All-Rounder");
+			 
+			 ResultSet rs = ps.executeQuery();
+			 while (rs.next()) {
+				 Playerinfomodle pm =  new Playerinfomodle();
+				 pm.setPlayerId(rs.getInt(1));
+				 pm.setFirstName(rs.getString(2));
+				 pm.setLastName(rs.getString(3));
+				 pm.setAge(rs.getInt(4));
+				 pm.setCity(rs.getString(5));
+				 pm.setRole(rs.getString(6));
+				 pm.setBatting_style(rs.getString(7));
+				 pm.setBowling_style(rs.getString(8));
+				 pm.setMatches(rs.getInt(9));
+				 pm.setRuns(rs.getInt(10));
+				 pm.setWickets(rs.getInt(11));
+				 pm.setBalls_faced(rs.getInt(12));
+				 pm.setBalls_bowled(rs.getInt(13));
+				 pm.setRuns_conceded(rs.getInt(14));
+				 pm.setStrike_rate(rs.getDouble(15));
+				 pm.setEconomy_rate(rs.getDouble(16));
+				 pm.setFitness_status(rs.getInt(17));
+				 pm.setUsername(rs.getString(18));
+				 list.add(pm);
+				 				 
+			 }
+			 
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return list;
+	}
+	
+	public List<Playerinfomodle> getallwicketkeeper() {
+		List<Playerinfomodle> list = new ArrayList<>();
+		try{
+			con = DBConnection.getConnection();
+			 PreparedStatement ps = con.prepareStatement("select * from players where role =?");
+			 ps.setString(1, "Wicket-Keeper");
+			 
+			 ResultSet rs = ps.executeQuery();
+			 while (rs.next()) {
+				 Playerinfomodle pm =  new Playerinfomodle();
+				 pm.setPlayerId(rs.getInt(1));
+				 pm.setFirstName(rs.getString(2));
+				 pm.setLastName(rs.getString(3));
+				 pm.setAge(rs.getInt(4));
+				 pm.setCity(rs.getString(5));
+				 pm.setRole(rs.getString(6));
+				 pm.setBatting_style(rs.getString(7));
+				 pm.setBowling_style(rs.getString(8));
+				 pm.setMatches(rs.getInt(9));
+				 pm.setRuns(rs.getInt(10));
+				 pm.setWickets(rs.getInt(11));
+				 pm.setBalls_faced(rs.getInt(12));
+				 pm.setBalls_bowled(rs.getInt(13));
+				 pm.setRuns_conceded(rs.getInt(14));
+				 pm.setStrike_rate(rs.getDouble(15));
+				 pm.setEconomy_rate(rs.getDouble(16));
+				 pm.setFitness_status(rs.getInt(17));
+				 pm.setUsername(rs.getString(18));
+				 list.add(pm);
+				 				 
+			 }
+			 
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return list;
+	}
 	
 
 }

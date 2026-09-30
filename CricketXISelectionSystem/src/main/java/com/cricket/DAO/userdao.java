@@ -64,6 +64,30 @@ public class userdao {
 	}
 	
 	
+	public int no_of_playersaddedbyuser( String username ) {
+		int count = 0;
+		try {
+			
+			con =DBConnection.getConnection();
+			String sql = "SELECT COUNT(player_id) AS total_players FROM players WHERE username = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, username);
+		
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				 count = rs.getInt("total_players");
+			}
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return count;
+		
+	}
 	
 
 }

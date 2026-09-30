@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@page import ="com.cricket.DAO.Playerdao,com.cricket.Service.Selection_Service  "  %>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -381,11 +382,11 @@ String usertype = (String) session.getAttribute("userrole");
 
         <div class="hero-buttons">
 
-            <a href="#selection"
+            <a href="PlayingXI.jsp"
                class="btn btn-warning btn-lg me-md-2">
 
                 <i class="bi bi-trophy-fill"></i>
-                Select Playing XI
+                View Playing XI
 
             </a>
 
@@ -502,7 +503,7 @@ String usertype = (String) session.getAttribute("userrole");
                         minimum fitness and match criteria.
                     </p>
 
-                    <a href="eligiblePlayers"
+                    <a href="Eligibleplayers.jsp"
                        class="btn btn-success">
 
                         Check Eligibility
@@ -531,10 +532,10 @@ String usertype = (String) session.getAttribute("userrole");
                         based on player performance.
                     </p>
 
-                    <a href="#selection"
+                    <a href="PlayingXI.jsp"
                        class="btn btn-success">
 
-                        Select XI
+                        Playing XI
 
                     </a>
 
@@ -549,179 +550,33 @@ String usertype = (String) session.getAttribute("userrole");
 </section>
 
 
-<!-- =====================================================
-                     PLAYING XI
-===================================================== -->
 
-<section class="section-dark section" id="selection">
-
-    <div class="container-fluid px-lg-5">
-
-        <div class="section-title">
-
-            <h2>
-                <span>Playing XI</span> Selection
-            </h2>
-
-            <p>
-                Your selected team will appear here
-            </p>
-
-        </div>
-
-
-        <div class="row justify-content-center">
-
-            <div class="col-12 col-lg-8">
-
-                <div class="xi-card">
-
-                    <h4 class="text-center mb-4">
-                        <i class="bi bi-trophy-fill text-warning"></i>
-                        Selected Playing XI
-                    </h4>
-
-
-                    <div class="player">
-
-                        <div class="d-flex align-items-center gap-3">
-
-                            <div class="player-number">
-                                1
-                            </div>
-
-                            <strong>Player 1</strong>
-
-                        </div>
-
-                        <span class="badge bg-success">
-                            Batsman
-                        </span>
-
-                    </div>
-
-
-                    <div class="player">
-
-                        <div class="d-flex align-items-center gap-3">
-
-                            <div class="player-number">
-                                2
-                            </div>
-
-                            <strong>Player 2</strong>
-
-                        </div>
-
-                        <span class="badge bg-success">
-                            Batsman
-                        </span>
-
-                    </div>
-
-
-                    <div class="player">
-
-                        <div class="d-flex align-items-center gap-3">
-
-                            <div class="player-number">
-                                3
-                            </div>
-
-                            <strong>Player 3</strong>
-
-                        </div>
-
-                        <span class="badge bg-success">
-                            Batsman
-                        </span>
-
-                    </div>
-
-
-                    <div class="player">
-
-                        <div class="d-flex align-items-center gap-3">
-
-                            <div class="player-number">
-                                4
-                            </div>
-
-                            <strong>Player 4</strong>
-
-                        </div>
-
-                        <span class="badge bg-info">
-                            All Rounder
-                        </span>
-
-                    </div>
-
-
-                    <div class="player">
-
-                        <div class="d-flex align-items-center gap-3">
-
-                            <div class="player-number">
-                                5
-                            </div>
-
-                            <strong>Player 5</strong>
-
-                        </div>
-
-                        <span class="badge bg-info">
-                            All Rounder
-                        </span>
-
-                    </div>
-
-
-                    <div class="player">
-
-                        <div class="d-flex align-items-center gap-3">
-
-                            <div class="player-number">
-                                6
-                            </div>
-
-                            <strong>Player 6</strong>
-
-                        </div>
-
-                        <span class="badge bg-warning text-dark">
-                            Wicket Keeper
-                        </span>
-
-                    </div>
-
-
-                    <div class="text-center mt-4">
-
-                        <a href="selectXI"
-                           class="btn btn-success btn-lg">
-
-                            <i class="bi bi-magic"></i>
-                            Generate Playing XI
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
 
 
 <!-- =====================================================
                          STATISTICS
 ===================================================== -->
+
+
+<%  Playerdao pd = new Playerdao();
+    Selection_Service ss = new Selection_Service();
+
+int totalPlayers = 0;
+int eligiblePlayers = 0;
+int totalbatters = 0;
+int totalbowllers = 0;
+int totalallrounders = 0;
+int totalwicketkeepers = 0;
+
+if (username != null) {
+    totalPlayers = pd.getall().size();
+    eligiblePlayers = pd.eligible_players().size();
+    totalbatters = pd.getallbatsmen().size();
+    totalbowllers = pd.getallbowlers().size();
+    totalallrounders =pd.getallAllrounders().size();
+    totalwicketkeepers = pd.getallwicketkeeper().size();
+    
+} %>
 
 <section class="section-dark section" id="stats">
 
@@ -744,7 +599,7 @@ String usertype = (String) session.getAttribute("userrole");
 
                     <i class="bi bi-people-fill"></i>
 
-                    <h3>25</h3>
+                    <h3><%= totalPlayers %></h3>
 
                     <p>Total Players</p>
 
@@ -759,7 +614,7 @@ String usertype = (String) session.getAttribute("userrole");
 
                     <i class="bi bi-check-circle-fill"></i>
 
-                    <h3>18</h3>
+                    <h3><%= eligiblePlayers %></h3>
 
                     <p>Eligible Players</p>
 
@@ -772,11 +627,11 @@ String usertype = (String) session.getAttribute("userrole");
 
                 <div class="stat-box">
 
-                    <i class="bi bi-trophy-fill"></i>
+                    <i class="bi bi-person-badge-fill"></i>
 
-                    <h3>11</h3>
+                    <h3><%=totalbatters %></h3>
 
-                    <p>Playing XI</p>
+                    <p>Batsmens</p>
 
                 </div>
 
@@ -787,11 +642,39 @@ String usertype = (String) session.getAttribute("userrole");
 
                 <div class="stat-box">
 
-                    <i class="bi bi-activity"></i>
+                    <i class="bi bi-lightning-charge-fill"></i>
 
-                    <h3>82%</h3>
+                    <h3><%=totalbowllers %></h3>
 
-                    <p>Team Fitness</p>
+                    <p>Bowlers</p>
+
+                </div>
+
+            </div>
+            
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-box">
+
+                    <i class="bi bi-stars"></i>
+
+                    <h3><%=totalallrounders %></h3>
+
+                    <p>All-Rounders</p>
+
+                </div>
+
+            </div>
+            
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-box">
+
+                    <i class="bi bi-shield-shaded"></i>
+
+                    <h3><%=totalwicketkeepers %></h3>
+
+                    <p>Wicket-Keepers</p>
 
                 </div>
 
